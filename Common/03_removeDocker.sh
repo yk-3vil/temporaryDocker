@@ -1,0 +1,104 @@
+#!/usr/bin/env bash
+
+# Docker クリーンアップスクリプト（共通化版）
+# コンテナとイメージを停止・削除し、削除を検証
+#
+# 使用方法:
+#   - 各imageディレクトリから: ../Common/03_removeDocker.sh env_openjdk_21_0_9.sh
+#   - プロジェクトルートから: ./Common/03_removeDocker.sh openjdk_21.0.9/env_openjdk_21_0_9.sh
+
+# ========================================
+# 引数チェック
+# ========================================
+
+if [[ $# -ne 1 ]]; then
+  echo "使用方法: $0 <環境ファイルパス>"
+  echo ""
+  echo "例（各imageディレクトリから）:"
+  echo "  ../Common/03_removeDocker.sh env_openjdk_21_0_9.sh"
+  echo ""
+  echo "例（プロジェクトルートから）:"
+  echo "  ./Common/03_removeDocker.sh openjdk_21.0.9/env_openjdk_21_0_9.sh"
+  exit 1
+fi
+
+ENV_FILE_PATH="$1"
+
+# ========================================
+# 環境ファイルの存在確認
+# ========================================
+
+if [[ ! -f "${ENV_FILE_PATH}" ]]; then
+  echo "エラー: 環境ファイルが見つかりません: ${ENV_FILE_PATH}"
+  exit 1
+fi
+
+# ========================================
+# パス解決
+# ========================================
+
+# 環境ファイルの絶対パスを取得
+ENV_FILE_ABS_PATH="$(cd "$(dirname "${ENV_FILE_PATH}")" && pwd)/$(basename "${ENV_FILE_PATH}")"
+
+# プロジェクトルートを計算
+SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+PROJECT_ROOT="$(cd "${SCRIPT_DIR}/.." && pwd)"
+
+# ========================================
+# 共通ライブラリの読み込み
+# ========================================
+
+# shellcheck source=./common.sh
+source "${PROJECT_ROOT}/Common/common.sh"
+
+# 環境ファイルを読み込み
+# shellcheck source=../openjdk_21.0.9/env_openjdk_21_0_9.sh
+source "${ENV_FILE_ABS_PATH}"
+
+# shellcheck source=./docker_common.sh
+source "${PROJECT_ROOT}/Common/docker_common.sh"
+
+# ========================================
+# Docker コマンドの存在確認
+# ========================================
+
+check_docker_command || error_exit "Docker が利用できません"
+
+# ========================================
+# クリーンアップ実行
+# ========================================
+
+log_info "Docker クリーンアップを開始します"
+log_info "  コンテナ名: ${ENV_CONTAINER_NAME}"
+log_info "  イメージ名: ${ENV_IMAGE_NAME}"
+echo ""
+
+# ========================================
+# コンテナの停止
+# ========================================
+docker_stop_container "${ENV_CONTAINER_NAME}"
+
+# ========================================
+# コンテナの削除
+# ========================================
+docker_remove_container "${ENV_CONTAINER_NAME}"
+
+# ========================================
+# コンテナ削除の検証
+# ========================================
+docker_verify_container_removed "${ENV_CONTAINER_NAME}"
+
+echo ""
+
+# ========================================
+# イメージの削除
+# ========================================
+docker_remove_image "${ENV_IMAGE_NAME}"
+
+# ========================================
+# イメージ削除の検証
+# ========================================
+docker_verify_image_removed "${ENV_IMAGE_NAME}"
+
+echo ""
+log_info "クリーンアップが完了しました"
