@@ -4,8 +4,8 @@
 # 対話型で起動し、終了時に自動削除される
 #
 # 使用方法:
-#   - 各imageディレクトリから: ../Common/01_dockerRunTemporary.sh env_cimg_openjdk_21_0_9.sh
-#   - プロジェクトルートから: ./Common/01_dockerRunTemporary.sh cimg_openjdk_21.0.9/env_cimg_openjdk_21_0_9.sh
+#   - 各imageディレクトリから: ../Common/01_dockerRunTemporary.sh env_ubuntu_24_04.sh
+#   - プロジェクトルートから: ./Common/01_dockerRunTemporary.sh ubuntu_24.04/env_ubuntu_24_04.sh
 
 # ========================================
 # 引数チェック
@@ -15,10 +15,10 @@ if [[ $# -ne 1 ]]; then
   echo "使用方法: $0 <環境ファイルパス>"
   echo ""
   echo "例（各imageディレクトリから）:"
-  echo "  ../Common/01_dockerRunTemporary.sh env_cimg_openjdk_21_0_9.sh"
+  echo "  ../Common/01_dockerRunTemporary.sh env_ubuntu_24_04.sh"
   echo ""
   echo "例（プロジェクトルートから）:"
-  echo "  ./Common/01_dockerRunTemporary.sh cimg_openjdk_21.0.9/env_cimg_openjdk_21_0_9.sh"
+  echo "  ./Common/01_dockerRunTemporary.sh ubuntu_24.04/env_ubuntu_24_04.sh"
   exit 1
 fi
 
@@ -56,7 +56,7 @@ MOUNT_SOURCE="${ENV_DIR}"
 source "${PROJECT_ROOT}/Common/common.sh"
 
 # 環境ファイルを読み込み
-# shellcheck source=../cimg_openjdk_21.0.9/env_cimg_openjdk_21_0_9.sh
+# shellcheck source=../ubuntu_24.04/env_ubuntu_24_04.sh
 source "${ENV_FILE_ABS_PATH}"
 
 # ========================================

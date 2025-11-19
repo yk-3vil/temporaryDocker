@@ -107,10 +107,10 @@ docker inspect node:20.0.0 --format='{{index .RepoDigests 0}}'
 
 ### OpenJDK 21.0.9 の実装
 
-- ディレクトリ: `cimg_openjdk_21.0.9/`
+- ディレクトリ: `ubuntu_24.04/`
 - ファイル:
   - `Dockerfile`
-  - `env_cimg_openjdk_21_0_9.sh`
+  - `env_ubuntu_24_04.sh`
 
 ## テンプレートの特徴
 
