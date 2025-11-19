@@ -1,12 +1,12 @@
 #!/usr/bin/env bash
 
-# OpenJDK 21.0.9 環境用の環境変数定義ファイル
+# cimg/openjdk 21.0.9 環境用の環境変数定義ファイル
 #
 # 利用方法:
-#   source "${PROJECT_ROOT}/.local/env_openjdk_21_0_9.sh"
+#   source "${PROJECT_ROOT}/cimg_openjdk_21.0.9/env_cimg_openjdk_21_0_9.sh"
 #
 # 概要:
-#   このファイルは、OpenJDK 21.0.9 環境で使用される共通変数を定義
+#   このファイルは、cimg/openjdk 21.0.9 環境で使用される共通変数を定義
 #   各スクリプトでこのファイルを source することで、変数の一元管理を実現
 
 # 厳格モードの設定
@@ -21,17 +21,17 @@ IFS=$'\n\t'
 readonly ENV_VERSION="21.0.9"
 
 # ベース名（環境の種類）
-readonly ENV_BASE_NAME="openjdk"
+readonly ENV_BASE_NAME="cimg_openjdk"
 
 # ========================================
 # Docker リソース名（アンダースコア区切り）
 # ========================================
 
 # Docker イメージ名
-readonly ENV_IMAGE_NAME="openjdk_21_0_9:latest"
+readonly ENV_IMAGE_NAME="cimg_openjdk_21_0_9:latest"
 
 # Docker コンテナ名
-readonly ENV_CONTAINER_NAME="openjdk_21_0_9_container"
+readonly ENV_CONTAINER_NAME="cimg_openjdk_21_0_9_container"
 
 # ========================================
 # マウント設定

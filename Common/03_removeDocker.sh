@@ -4,8 +4,8 @@
 # コンテナとイメージを停止・削除し、削除を検証
 #
 # 使用方法:
-#   - 各imageディレクトリから: ../Common/03_removeDocker.sh env_openjdk_21_0_9.sh
-#   - プロジェクトルートから: ./Common/03_removeDocker.sh openjdk_21.0.9/env_openjdk_21_0_9.sh
+#   - 各imageディレクトリから: ../Common/03_removeDocker.sh env_cimg_openjdk_21_0_9.sh
+#   - プロジェクトルートから: ./Common/03_removeDocker.sh cimg_openjdk_21.0.9/env_cimg_openjdk_21_0_9.sh
 
 # ========================================
 # 引数チェック
@@ -15,10 +15,10 @@ if [[ $# -ne 1 ]]; then
   echo "使用方法: $0 <環境ファイルパス>"
   echo ""
   echo "例（各imageディレクトリから）:"
-  echo "  ../Common/03_removeDocker.sh env_openjdk_21_0_9.sh"
+  echo "  ../Common/03_removeDocker.sh env_cimg_openjdk_21_0_9.sh"
   echo ""
   echo "例（プロジェクトルートから）:"
-  echo "  ./Common/03_removeDocker.sh openjdk_21.0.9/env_openjdk_21_0_9.sh"
+  echo "  ./Common/03_removeDocker.sh cimg_openjdk_21.0.9/env_cimg_openjdk_21_0_9.sh"
   exit 1
 fi
 
@@ -52,7 +52,7 @@ PROJECT_ROOT="$(cd "${SCRIPT_DIR}/.." && pwd)"
 source "${PROJECT_ROOT}/Common/common.sh"
 
 # 環境ファイルを読み込み
-# shellcheck source=../openjdk_21.0.9/env_openjdk_21_0_9.sh
+# shellcheck source=../cimg_openjdk_21.0.9/env_cimg_openjdk_21_0_9.sh
 source "${ENV_FILE_ABS_PATH}"
 
 # shellcheck source=./docker_common.sh

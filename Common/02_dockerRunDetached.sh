@@ -4,8 +4,8 @@
 # バックグラウンドで起動し、無限ループで実行し続ける
 #
 # 使用方法:
-#   - 各imageディレクトリから: ../Common/02_dockerRunDetached.sh env_openjdk_21_0_9.sh
-#   - プロジェクトルートから: ./Common/02_dockerRunDetached.sh openjdk_21.0.9/env_openjdk_21_0_9.sh
+#   - 各imageディレクトリから: ../Common/02_dockerRunDetached.sh env_cimg_openjdk_21_0_9.sh
+#   - プロジェクトルートから: ./Common/02_dockerRunDetached.sh cimg_openjdk_21.0.9/env_cimg_openjdk_21_0_9.sh
 
 # ========================================
 # 引数チェック
@@ -15,10 +15,10 @@ if [[ $# -ne 1 ]]; then
   echo "使用方法: $0 <環境ファイルパス>"
   echo ""
   echo "例（各imageディレクトリから）:"
-  echo "  ../Common/02_dockerRunDetached.sh env_openjdk_21_0_9.sh"
+  echo "  ../Common/02_dockerRunDetached.sh env_cimg_openjdk_21_0_9.sh"
   echo ""
   echo "例（プロジェクトルートから）:"
-  echo "  ./Common/02_dockerRunDetached.sh openjdk_21.0.9/env_openjdk_21_0_9.sh"
+  echo "  ./Common/02_dockerRunDetached.sh cimg_openjdk_21.0.9/env_cimg_openjdk_21_0_9.sh"
   exit 1
 fi
 
@@ -56,7 +56,7 @@ MOUNT_SOURCE="${ENV_DIR}"
 source "${PROJECT_ROOT}/Common/common.sh"
 
 # 環境ファイルを読み込み
-# shellcheck source=../openjdk_21.0.9/env_openjdk_21_0_9.sh
+# shellcheck source=../cimg_openjdk_21.0.9/env_cimg_openjdk_21_0_9.sh
 source "${ENV_FILE_ABS_PATH}"
 
 # ========================================
