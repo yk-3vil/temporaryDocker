@@ -4,8 +4,8 @@
 # 任意の環境ファイルを引数として受け取り、イメージをビルド
 #
 # 使用方法:
-#   - 各imageディレクトリから: ../Common/00_dockerBuild.sh env_openjdk_21_0_9.sh
-#   - プロジェクトルートから: ./Common/00_dockerBuild.sh openjdk_21.0.9/env_openjdk_21_0_9.sh
+#   - 各imageディレクトリから: ../Common/00_dockerBuild.sh env_ubuntu_24_04.sh
+#   - プロジェクトルートから: ./Common/00_dockerBuild.sh ubuntu_24.04/env_ubuntu_24_04.sh
 
 # ========================================
 # 引数チェック
@@ -15,10 +15,10 @@ if [[ $# -ne 1 ]]; then
   echo "使用方法: $0 <環境ファイルパス>"
   echo ""
   echo "例（各imageディレクトリから）:"
-  echo "  ../Common/00_dockerBuild.sh env_openjdk_21_0_9.sh"
+  echo "  ../Common/00_dockerBuild.sh env_ubuntu_24_04.sh"
   echo ""
   echo "例（プロジェクトルートから）:"
-  echo "  ./Common/00_dockerBuild.sh openjdk_21.0.9/env_openjdk_21_0_9.sh"
+  echo "  ./Common/00_dockerBuild.sh ubuntu_24.04/env_ubuntu_24_04.sh"
   exit 1
 fi
 
@@ -56,7 +56,7 @@ DOCKERFILE_PATH="${ENV_DIR}/Dockerfile"
 source "${PROJECT_ROOT}/Common/common.sh"
 
 # 環境ファイルを読み込み
-# shellcheck source=../openjdk_21.0.9/env_openjdk_21_0_9.sh
+# shellcheck source=../ubuntu_24.04/env_ubuntu_24_04.sh
 source "${ENV_FILE_ABS_PATH}"
 
 # ========================================
@@ -75,12 +75,14 @@ log_info "  Dockerfile: ${DOCKERFILE_PATH}"
 log_info "  ビルドコンテキスト: ${ENV_DIR}"
 log_info "  ホストUID: $(id -u)"
 log_info "  ホストGID: $(id -g)"
+log_info "  作成日時: ${ENV_CREATED_DATE}"
 
 # イメージビルド実行
-# ホストのUID/GIDをビルド引数として渡し、コンテナ内のユーザーと一致させる
+# ホストのUID/GID、作成日時をビルド引数として渡す
 if docker build \
   --build-arg USER_ID="$(id -u)" \
   --build-arg GROUP_ID="$(id -g)" \
+  --build-arg CREATED_DATE="${ENV_CREATED_DATE}" \
   -f "${DOCKERFILE_PATH}" \
   -t "${ENV_IMAGE_NAME}" \
   "${ENV_DIR}"; then

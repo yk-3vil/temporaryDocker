@@ -1,11 +1,14 @@
 # ベースイメージをdigest固定で指定（再現性とセキュリティ向上）
-FROM cimg/openjdk:21.0.9@sha256:488f1b4f69e50aed578889c302ae9812479ae43924fa02eafc55055f779ea8dd
+FROM docker.io/cimg/openjdk:21.0.9@sha256:488f1b4f69e50aed578889c302ae9812479ae43924fa02eafc55055f779ea8dd
+
+# ビルド引数の定義
+ARG CREATED_DATE
 
 # OCI推奨LABELの設定
 LABEL org.opencontainers.image.title="OpenJDK 21.0.9 Development Environment"
 LABEL org.opencontainers.image.description="CircleCI OpenJDK 21.0.9 image with vim for development"
 LABEL org.opencontainers.image.version="21.0.9"
-LABEL org.opencontainers.image.created="2025-11-13T00:00:00Z"
+LABEL org.opencontainers.image.created="${CREATED_DATE}"
 
 # APTの非対話モード設定
 ARG DEBIAN_FRONTEND=noninteractive
