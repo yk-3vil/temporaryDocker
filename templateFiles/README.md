@@ -37,7 +37,7 @@ cp ../templateFiles/env_IMAGENAME_VERSION.template.sh ./env_nodejs_20_0_0.sh
 
 | プレースホルダー | 説明 | 例 |
 |----------------|------|-----|
-| `<BASE_IMAGE>` | ベースイメージ | `node:20.0.0`, `ubuntu:24.04` |
+| `<BASE_IMAGE>` | ベースイメージ | `docker.io/node:20.0.0`, `docker.io/ubuntu:24.04` |
 | `<IMAGE_DIGEST>` | イメージのダイジェスト | `sha256:xxxxx` |
 | `<IMAGE_TITLE>` | イメージのタイトル | `"Node.js 20.0.0 Development Environment"` |
 | `<IMAGE_DESCRIPTION>` | イメージの説明 | `"Node.js 20.0.0 with essential development tools"` |
@@ -107,16 +107,16 @@ docker inspect node:20.0.0 --format='{{index .RepoDigests 0}}'
 
 ### OpenJDK 21.0.9 の実装
 
-- ディレクトリ: `openjdk_21.0.9/`
+- ディレクトリ: `cimg_openjdk_21.0.9/`
 - ファイル:
   - `Dockerfile`
-  - `env_openjdk_21_0_9.sh`
+  - `env_cimg_openjdk_21_0_9.sh`
 
 ## テンプレートの特徴
 
 ### 既存ユーザー保持方式
 
-テンプレートは、ベースイメージの既存ユーザーを削除せず、UID 衝突時に既存ユーザーの UID を移動する方式を採用
+テンプレートは、ベースイメージの既存ユーザーを削除せず、UID 衝突時に既存ユーザーの UID を移動する方式を採用。
 
 **利点**:
 - ベースイメージの初期設定を保持

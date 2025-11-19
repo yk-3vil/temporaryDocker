@@ -1,5 +1,5 @@
 # ベースイメージをdigest固定で指定（再現性とセキュリティ向上）
-FROM cimg/openjdk:21.0.9@sha256:488f1b4f69e50aed578889c302ae9812479ae43924fa02eafc55055f779ea8dd
+FROM docker.io/cimg/openjdk:21.0.9@sha256:488f1b4f69e50aed578889c302ae9812479ae43924fa02eafc55055f779ea8dd
 
 # OCI推奨LABELの設定
 LABEL org.opencontainers.image.title="OpenJDK 21.0.9 Development Environment"

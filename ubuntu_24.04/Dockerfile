@@ -1,5 +1,5 @@
 # ベースイメージをdigest固定で指定（再現性とセキュリティ向上）
-FROM ubuntu:24.04@sha256:99c35190e22d294cdace2783ac55effc69d32896daaa265f0bbedbcde4fbe3e5
+FROM docker.io/ubuntu:24.04@sha256:99c35190e22d294cdace2783ac55effc69d32896daaa265f0bbedbcde4fbe3e5
 
 # OCI推奨LABELの設定
 LABEL org.opencontainers.image.title="Ubuntu 24.04 Development Environment"
