@@ -1,11 +1,14 @@
 # ベースイメージをdigest固定で指定（再現性とセキュリティ向上）
 FROM docker.io/ubuntu:24.04@sha256:99c35190e22d294cdace2783ac55effc69d32896daaa265f0bbedbcde4fbe3e5
 
+# ビルド引数の定義
+ARG CREATED_DATE
+
 # OCI推奨LABELの設定
 LABEL org.opencontainers.image.title="Ubuntu 24.04 Development Environment"
 LABEL org.opencontainers.image.description="Ubuntu 24.04 LTS with essential development tools"
 LABEL org.opencontainers.image.version="24.04"
-LABEL org.opencontainers.image.created="2025-11-16T00:00:00Z"
+LABEL org.opencontainers.image.created="${CREATED_DATE}"
 
 # APTの非対話モード設定
 ARG DEBIAN_FRONTEND=noninteractive

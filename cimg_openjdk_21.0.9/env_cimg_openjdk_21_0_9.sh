@@ -41,6 +41,13 @@ readonly ENV_CONTAINER_NAME="cimg_openjdk_21_0_9_container"
 readonly ENV_MOUNT_TARGET="/home/circleci/project"
 
 # ========================================
+# イメージ作成日時（ISO 8601形式）
+# ========================================
+
+# 現在時刻をISO 8601形式で取得（UTC）
+readonly ENV_CREATED_DATE="$(date -u '+%Y-%m-%dT%H:%M:%SZ')"
+
+# ========================================
 # バージョン変換ヘルパー関数
 # ========================================
 
@@ -69,3 +76,4 @@ export ENV_BASE_NAME
 export ENV_IMAGE_NAME
 export ENV_CONTAINER_NAME
 export ENV_MOUNT_TARGET
+export ENV_CREATED_DATE

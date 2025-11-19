@@ -75,12 +75,14 @@ log_info "  Dockerfile: ${DOCKERFILE_PATH}"
 log_info "  ビルドコンテキスト: ${ENV_DIR}"
 log_info "  ホストUID: $(id -u)"
 log_info "  ホストGID: $(id -g)"
+log_info "  作成日時: ${ENV_CREATED_DATE}"
 
 # イメージビルド実行
-# ホストのUID/GIDをビルド引数として渡し、コンテナ内のユーザーと一致させる
+# ホストのUID/GID、作成日時をビルド引数として渡す
 if docker build \
   --build-arg USER_ID="$(id -u)" \
   --build-arg GROUP_ID="$(id -g)" \
+  --build-arg CREATED_DATE="${ENV_CREATED_DATE}" \
   -f "${DOCKERFILE_PATH}" \
   -t "${ENV_IMAGE_NAME}" \
   "${ENV_DIR}"; then
