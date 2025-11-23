@@ -24,14 +24,14 @@ readonly ENV_VERSION="24.04"
 readonly ENV_BASE_NAME="ubuntu"
 
 # ========================================
-# Docker リソース名（アンダースコア区切り）
+# Docker リソース名（バージョンはドット区切り）
 # ========================================
 
 # Docker イメージ名
-readonly ENV_IMAGE_NAME="ubuntu_24_04:latest"
+readonly ENV_IMAGE_NAME="ubuntu_24.04:latest"
 
 # Docker コンテナ名
-readonly ENV_CONTAINER_NAME="ubuntu_24_04_container"
+readonly ENV_CONTAINER_NAME="ubuntu_24.04_container"
 
 # ========================================
 # マウント設定

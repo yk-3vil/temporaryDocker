@@ -26,16 +26,16 @@ readonly ENV_VERSION="<VERSION>"
 readonly ENV_BASE_NAME="<IMAGENAME>"
 
 # ========================================
-# Docker リソース名（アンダースコア区切り）
+# Docker リソース名（バージョンはドット区切り）
 # ========================================
 
 # Docker イメージ名
-# 例: "ubuntu_24_04:latest", "openjdk_21_0_9:latest"
-readonly ENV_IMAGE_NAME="<IMAGENAME>_<VERSION_UNDERSCORE>:latest"
+# 例: "ubuntu_24.04:latest", "cimg_openjdk_21.0.9:latest"
+readonly ENV_IMAGE_NAME="<IMAGENAME>_<VERSION>:latest"
 
 # Docker コンテナ名
-# 例: "ubuntu_24_04_container", "openjdk_21_0_9_container"
-readonly ENV_CONTAINER_NAME="<IMAGENAME>_<VERSION_UNDERSCORE>_container"
+# 例: "ubuntu_24.04_container", "cimg_openjdk_21.0.9_container"
+readonly ENV_CONTAINER_NAME="<IMAGENAME>_<VERSION>_container"
 
 # ========================================
 # マウント設定

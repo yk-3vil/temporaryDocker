@@ -14,11 +14,11 @@ Docker を使用した開発環境管理プロジェクト
 
 ```bash
 # 各環境ディレクトリから実行
-cd openjdk_21.0.9
-../Common/00_dockerBuild.sh env_openjdk_21_0_9.sh
+cd ubuntu_24.04
+../Common/00_dockerBuild.sh env_ubuntu_24_04.sh
 
 # またはプロジェクトルートから実行
-./Common/00_dockerBuild.sh openjdk_21.0.9/env_openjdk_21_0_9.sh
+./Common/00_dockerBuild.sh ubuntu_24.04/env_ubuntu_24_04.sh
 ```
 
 Docker イメージをビルド。初回のみ実行が必要。  
@@ -30,11 +30,11 @@ Docker イメージをビルド。初回のみ実行が必要。
 
 ```bash
 # 各環境ディレクトリから実行
-cd openjdk_21.0.9
-../Common/01_dockerRunTemporary.sh env_openjdk_21_0_9.sh
+cd ubuntu_24.04
+../Common/01_dockerRunTemporary.sh env_ubuntu_24_04.sh
 
 # またはプロジェクトルートから実行
-./Common/01_dockerRunTemporary.sh openjdk_21.0.9/env_openjdk_21_0_9.sh
+./Common/01_dockerRunTemporary.sh ubuntu_24.04/env_ubuntu_24_04.sh
 ```
 
 - 対話型シェルが起動する
@@ -44,26 +44,26 @@ cd openjdk_21.0.9
 
 ```bash
 # 各環境ディレクトリから実行
-cd openjdk_21.0.9
-../Common/02_dockerRunDetached.sh env_openjdk_21_0_9.sh
+cd ubuntu_24.04
+../Common/02_dockerRunDetached.sh env_ubuntu_24_04.sh
 
 # またはプロジェクトルートから実行
-./Common/02_dockerRunDetached.sh openjdk_21.0.9/env_openjdk_21_0_9.sh
+./Common/02_dockerRunDetached.sh ubuntu_24.04/env_ubuntu_24_04.sh
 ```
 
 - バックグラウンドでコンテナが起動
-- コンテナにアタッチする: `docker exec -it openjdk_21_0_9_container /bin/bash`
-- コンテナを停止する: `docker stop openjdk_21_0_9_container`
+- コンテナにアタッチする: `docker exec -it ubuntu_24_04_container /bin/bash`
+- コンテナを停止する: `docker stop ubuntu_24_04_container`
 
 ### 3. クリーンアップ
 
 ```bash
 # 各環境ディレクトリから実行
-cd openjdk_21.0.9
-../Common/03_removeDocker.sh env_openjdk_21_0_9.sh
+cd ubuntu_24.04
+../Common/03_removeDocker.sh env_ubuntu_24_04.sh
 
 # またはプロジェクトルートから実行
-./Common/03_removeDocker.sh openjdk_21.0.9/env_openjdk_21_0_9.sh
+./Common/03_removeDocker.sh ubuntu_24.04/env_ubuntu_24_04.sh
 ```
 
 コンテナの停止、削除、およびイメージの削除を一括で実行
