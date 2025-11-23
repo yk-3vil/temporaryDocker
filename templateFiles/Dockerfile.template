@@ -61,7 +61,7 @@ RUN set -eux; \
   echo "devuser ALL=(ALL) NOPASSWD:ALL" >> /etc/sudoers
 
 # 作業ディレクトリの作成と権限設定
-# 例: /workspace, /home/circleci/project など
+# 例: /workspace, /app など
 RUN set -eux; \
   mkdir -p <MOUNT_TARGET>; \
   chown -R "${BUILD_UID}":"${BUILD_GID}" <MOUNT_TARGET>

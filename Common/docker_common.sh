@@ -1,19 +1,44 @@
 #!/usr/bin/env bash
+#
+################################################################################
+# Script Description
+# Overview:
+#   共通 Docker 操作関数ライブラリ
+#   Docker コンテナ・イメージの操作を関数化し、処理の一元化
+# Usage:
+#   source "${PROJECT_ROOT}/Common/common.sh"
+#   source "${PROJECT_ROOT}/Common/docker_common.sh"
+# Arguments:
+#   なし
+# Returns:
+#   なし（関数定義のみ）
+# Notes:
+#   このファイルは common.sh に依存（log_* 関数を使用）
+#   使用前に必ず common.sh を source すること
+#   すべての削除系関数はべき等性を保証（既に削除済みでもエラーにならない）
+# Example:
+#   source "${PROJECT_ROOT}/Common/common.sh"
+#   source "${PROJECT_ROOT}/Common/docker_common.sh"
+#   docker_stop_container "${ENV_CONTAINER_NAME}"
+#   docker_remove_container "${ENV_CONTAINER_NAME}"
+################################################################################
 
-# 共通 Docker 操作関数ライブラリ
-# Docker コンテナ・イメージの操作を関数化し、処理の一元化を実現
-
-# 注意: このファイルは common.sh に依存（log_* 関数を使用）
-# 使用前に common.sh を source すること
-
-# ========================================
-# コンテナ停止関数
-# ========================================
-
-# Docker コンテナを停止
-# 引数: $1 - コンテナ名
-# 戻り値: 0（成功、既に停止済みまたは存在しない場合も含む）、1（引数エラー）
-docker_stop_container() {
+################################################################################
+# Function Description:
+#   Docker コンテナを停止
+# Overview:
+#   指定されたコンテナを停止し、べき等性を保証
+# Arguments:
+#   $1: コンテナ名
+# Returns/Outputs:
+#   成功時は終了コード0を返却（既に停止済みまたは存在しない場合も含む）
+#   引数エラー時は終了コード1を返却
+# Notes:
+#   べき等性を保証：既に停止済みまたは存在しない場合も成功として扱う
+# Example:
+#   docker_stop_container "${ENV_CONTAINER_NAME}"
+################################################################################
+function docker_stop_container() {
   local container_name="$1"
 
   # 引数チェック
@@ -33,14 +58,24 @@ docker_stop_container() {
   fi
 }
 
-# ========================================
-# コンテナ削除関数
-# ========================================
-
-# Docker コンテナを削除（通常削除 → 強制削除のリトライ付き）
-# 引数: $1 - コンテナ名
-# 戻り値: 0（成功、既に削除済みまたは存在しない場合も含む）、1（引数エラー）
-docker_remove_container() {
+################################################################################
+# Function Description:
+#   Docker コンテナを削除（通常削除 → 強制削除のリトライ付き）
+# Overview:
+#   指定されたコンテナを削除し、失敗時は強制削除を試行
+#   べき等性を保証
+# Arguments:
+#   $1: コンテナ名
+# Returns/Outputs:
+#   成功時は終了コード0を返却（既に削除済みまたは存在しない場合も含む）
+#   引数エラー時は終了コード1を返却
+# Notes:
+#   通常削除失敗時は docker rm -f で強制削除を試行
+#   べき等性を保証：既に削除済みまたは存在しない場合も成功として扱う
+# Example:
+#   docker_remove_container "${ENV_CONTAINER_NAME}"
+################################################################################
+function docker_remove_container() {
   local container_name="$1"
 
   # 引数チェック
@@ -66,14 +101,24 @@ docker_remove_container() {
   fi
 }
 
-# ========================================
-# イメージ削除関数
-# ========================================
-
-# Docker イメージを削除（通常削除 → 強制削除のリトライ付き）
-# 引数: $1 - イメージ名
-# 戻り値: 0（成功、既に削除済みまたは存在しない場合も含む）、1（引数エラー）
-docker_remove_image() {
+################################################################################
+# Function Description:
+#   Docker イメージを削除（通常削除 → 強制削除のリトライ付き）
+# Overview:
+#   指定されたイメージを削除し、失敗時は強制削除を試行
+#   べき等性を保証
+# Arguments:
+#   $1: イメージ名
+# Returns/Outputs:
+#   成功時は終了コード0を返却（既に削除済みまたは存在しない場合も含む）
+#   引数エラー時は終了コード1を返却
+# Notes:
+#   通常削除失敗時は docker rmi -f で強制削除を試行
+#   べき等性を保証：既に削除済みまたは存在しない場合も成功として扱う
+# Example:
+#   docker_remove_image "${ENV_IMAGE_NAME}"
+################################################################################
+function docker_remove_image() {
   local image_name="$1"
 
   # 引数チェック
@@ -99,14 +144,22 @@ docker_remove_image() {
   fi
 }
 
-# ========================================
-# コンテナ削除検証関数
-# ========================================
-
-# Docker コンテナが削除されたことを検証
-# 引数: $1 - コンテナ名
-# 戻り値: 0（削除済み）、1（まだ存在する）
-docker_verify_container_removed() {
+################################################################################
+# Function Description:
+#   Docker コンテナが削除されたことを検証
+# Overview:
+#   指定されたコンテナが削除されたことを確認
+# Arguments:
+#   $1: コンテナ名
+# Returns/Outputs:
+#   削除済みの場合は終了コード0を返却
+#   まだ存在する場合はエラーメッセージを出力し終了コード1を返却
+# Notes:
+#   docker ps -a で全コンテナをリストし、grep で存在確認
+# Example:
+#   docker_verify_container_removed "${ENV_CONTAINER_NAME}"
+################################################################################
+function docker_verify_container_removed() {
   local container_name="$1"
 
   # 引数チェック
@@ -124,14 +177,22 @@ docker_verify_container_removed() {
   fi
 }
 
-# ========================================
-# イメージ削除検証関数
-# ========================================
-
-# Docker イメージが削除されたことを検証
-# 引数: $1 - イメージ名
-# 戻り値: 0（削除済み）、1（まだ存在する）
-docker_verify_image_removed() {
+################################################################################
+# Function Description:
+#   Docker イメージが削除されたことを検証
+# Overview:
+#   指定されたイメージが削除されたことを確認
+# Arguments:
+#   $1: イメージ名
+# Returns/Outputs:
+#   削除済みの場合は終了コード0を返却
+#   まだ存在する場合はエラーメッセージを出力し終了コード1を返却
+# Notes:
+#   docker images で全イメージをリストし、grep で存在確認
+# Example:
+#   docker_verify_image_removed "${ENV_IMAGE_NAME}"
+################################################################################
+function docker_verify_image_removed() {
   local image_name="$1"
 
   # 引数チェック
