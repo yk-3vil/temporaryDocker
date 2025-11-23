@@ -24,14 +24,14 @@ readonly ENV_VERSION="21.0.9"
 readonly ENV_BASE_NAME="cimg_openjdk"
 
 # ========================================
-# Docker リソース名（アンダースコア区切り）
+# Docker リソース名（バージョンはドット区切り）
 # ========================================
 
 # Docker イメージ名
-readonly ENV_IMAGE_NAME="cimg_openjdk_21_0_9:latest"
+readonly ENV_IMAGE_NAME="cimg_openjdk_21.0.9:latest"
 
 # Docker コンテナ名
-readonly ENV_CONTAINER_NAME="cimg_openjdk_21_0_9_container"
+readonly ENV_CONTAINER_NAME="cimg_openjdk_21.0.9_container"
 
 # ========================================
 # マウント設定
