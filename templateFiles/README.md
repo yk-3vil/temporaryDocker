@@ -44,7 +44,7 @@ cp ../templateFiles/env_IMAGENAME_VERSION.template.sh ./env_nodejs_20_0_0.sh
 | `<IMAGE_VERSION>` | イメージのバージョン | `"20.0.0"` |
 | `<CREATED_DATE>` | 作成日（ISO 8601形式） | `"2025-11-16T00:00:00Z"` |
 | `<PACKAGES>` | インストールするパッケージ（改行と `\` で区切る） | `vim \`<br>`    git \`<br>`    curl` |
-| `<MOUNT_TARGET>` | マウント先パス | `/workspace`, `/home/circleci/project` |
+| `<MOUNT_TARGET>` | マウント先パス | `/workspace`, `/app` |
 
 #### env_IMAGENAME_VERSION.sh のプレースホルダー
 
@@ -53,7 +53,7 @@ cp ../templateFiles/env_IMAGENAME_VERSION.template.sh ./env_nodejs_20_0_0.sh
 | `<IMAGENAME>` | イメージ名（小文字） | `nodejs`, `ubuntu`, `python` |
 | `<VERSION>` | バージョン（ドット区切り） | `20.0.0`, `24.04` |
 | `<VERSION_UNDERSCORE>` | バージョン（アンダースコア区切り） | `20_0_0`, `24_04` |
-| `<MOUNT_TARGET>` | マウント先パス | `/workspace`, `/home/circleci/project` |
+| `<MOUNT_TARGET>` | マウント先パス | `/workspace`, `/app` |
 
 ### 4. 置換方法
 
