@@ -170,9 +170,3 @@ docker build \
 例:
 - イメージ: `ubuntu_24_04:latest`
 - コンテナ: `ubuntu_24_04_container`
-
-## 関連ドキュメント
-
-- プロジェクトルートの `CLAUDE.md`: プロジェクト全体の説明
-- プロジェクトルートの `README.md`: 使用方法とコマンド
-- `dev_diary/`: 開発日誌（実装の詳細と学び）
